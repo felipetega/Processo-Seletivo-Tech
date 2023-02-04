@@ -1,4 +1,20 @@
 from django.db import models
+
+TIPOS_TECIDO = (
+  ('LINHO', 'Linho'),
+  ('CAMURÇA', 'Camurça'),
+  ('MESCLA', 'Mescla'),
+  ('MOLETOM', 'Moletom'),
+  )
+
+CORES=(
+  ('AZUL', 'Azul'),
+  ('AMARELO', 'Amarelo'),
+  ('VERMELHO', 'Vermelho'),
+  ('VERDE', 'Verde'),
+  )
+
+
 class Tecido(models.Model):
 
   choices_tipo = (

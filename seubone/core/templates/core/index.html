@@ -16,72 +16,58 @@
                 {% endfor %}
             {% endif %}
             
-            <h2 class="h2">Novo Tecido</h2>
+            <h2 class="h2">Adicionar ao Estoque</h2>
+            <form action="{% url 'index' %}" method="POST">{% csrf_token %}
             <div class="row">
-                    
                 <div class="col-md-4">
-                    <select class="form-select" name="tecnologias">
-                        {% for tecido in tecidos %}
-                            <option value="{{tecido.tipo}}">{{tecido.tipo}}</option>
+                    <h6 class="h6">Tecido</h6>
+                    <select class="form-select" name="tipo">
+                        {% for value, key in tipos_tecido %}
+                            <option value="{{value}}">{{key}}</option>
                         {% endfor %}
                     </select>
                 </div>
 
                 <div class="col-md-4">
-                    <select class="form-select" name="tecnologias">
-                        {% for tecido in tecidos %}
-                            <option value="{{tecido.tipo}}">{{tecido.tipo}}</option>
+                    <h6 class="h6">Cor</h6>
+                    <select class="form-select" name="cor">
+                        {% for value, key in cores %}
+                            <option value="{{value}}">{{key}}</option>
                         {% endfor %}
                     </select>
                 </div>
                 
             
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <h6 class="h6">Metro(s)</h6>
                 <div class="input-group mb-1">
-                    <input type="text" class="form-control" placeholder="Metro(s)" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <input type="number" class="form-control" name="metros" aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">Adicionar</button>
+                      <button class="btn btn-primary" type="submit">Adicionar</button>
                     </div>
                   </div>
             </div>
         </div>
         </div>
+    </form>
+
+
     <div class="wrapper">
         <div class="box"> 
-            <div class="header-box">
-                {% if messages %}
-                    {% for message in messages %}
-                        <section class="alert {{message.tags}}">
-                            {{message}}
-                        </section>
-                    {% endfor %}
-                {% endif %}
-                
-                <h2 class="h2">Estoque de Tecidos</h2>
-            </div>
             <div class="body-box">
+                <h2 class="h2">Estoque de Tecidos</h2>
             
-                <form action="" method="GET">{% csrf_token %}
                 <div class="row">
-                    
-                        <div class="col-md-5">
-                            <input type="text" placeholder="Busque pelo nome" class="form-control" name="nome">
-                        </div>
-
-                        <div class="col-md-4">
-                            <select class="form-select" name="tecnologias">
-                                {% for tecido in tecidos %}
-                                    <option value="{{tecido.tipo}}">{{tecido.tipo}}</option>
+                    <form action="{% url 'index' %}" method="GET">{% csrf_token %}
+                        <div class="col-md-3">
+                            <h6 class="h6">Ordenar por:</h6>
+                            <select class="form-select" name="filtro_selecionado" onchange="this.form.submit()">
+                                <option value="0"></option>
+                                {% for key, value in filtros.items %}
+                                    <option value="{{value}}">{{key}}</option>
                                 {% endfor %}
                             </select>
                         </div>
-                    
-                    <div class="col-md-3">
-                        <input type="submit" value="FILTRAR" class="btn btn-primary">
-                    </div>
-                </div>
-                </form>
-
                 <table class="table">
                     <thead>
                         <tr>
@@ -101,16 +87,15 @@
                           <td>{{tecido.cor}}</td>
                           <td>{{tecido.metros}} metro(s)</td>
                           <td>
-                            <form action="" method="POST">{% csrf_token %}
-                              <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                  <button class="btn btn-danger" type="button">Alterar</button>
-                                </div>
-                              </div>
+                                    <button onclick="location.href = '{% url 'alterar' tecido.id %}'" type="button" class="btn btn-success">
+                                        +
+                                    </button>
+                                    <button onclick="location.href = '{% url 'subtrair_estoque' tecido.id %}'" type="button" class="btn btn-warning">
+                                        -
+                                    </button>
                           </td>
                           <td>
-                            <button type="button" class="btn btn-danger">Excluir</button>
+                            <button onclick="location.href = '{% url 'excluir' tecido.id %}'" type="button" class="btn btn-danger">Excluir</button>
                           </td>
                       </tr>
                   {% endfor %}
