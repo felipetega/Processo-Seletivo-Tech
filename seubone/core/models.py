@@ -18,3 +18,6 @@ class Tecido(models.Model):
   tipo = models.CharField(max_length=50, choices=choices_tipo)
   cor = models.CharField(max_length=50, choices=choices_cores)
   metros = models.IntegerField()
+
+  def __str__(self):
+    return f'{self.tipo} - {self.cor} - {self.metros} metro(s)'
