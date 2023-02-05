@@ -1,0 +1,20 @@
+1- Ative o virtual enviroment, pasta venv
+
+venv\Scripts\activate.bat
+
+Se estiver no VSCode, utilize 'ctrl+shift+p' e verifique o Interpretador Python selecionado
+
+Com o venv ativo, dê um pip freeze, as dependências instaladas devem ser essas: 
+
+pip freeze
+asgiref==3.6.0
+Django==4.1.6
+psycopg2==2.9.5
+sqlparse==0.4.3
+tzdata==2022.7
+
+2- Entre na pasta 'seubone' e digite 'python manage.py runserver'
+
+3- As 2 rotas existentes são:
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/producao/
