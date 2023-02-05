@@ -31,7 +31,13 @@ def index(request):
       cor=cor,
       metros=metros
     )
-    tecido.save()
+    if Tecido.objects.filter(tipo=tecido.tipo, cor=tecido.cor).exists():
+      messages.warning(request, "Esse tecido já está no estoque!")
+    elif metros.isnumeric() == False:
+      messages.warning(request, "Selecione a quantia a ser adicionada!")
+    else:
+      tecido.save()
+      messages.info(request, "Adicionado ao estoque com sucesso!")
     return redirect('/')
 
 
