@@ -36,12 +36,16 @@ def index(request):
 
 
 
-def estoque(request):
+def producao(request):
     tecidos = Tecido.objects.all()
     proportion = 7
-    metros_totais = Tecido.objects.all().aggregate(Sum('metros'))
-    print(metros_totais)
-    return render(request, 'core/estoque.html', {'tecidos':tecidos, 'proportion':proportion, 'metros_totais':metros_totais})
+    bones_totais = 0
+    for bones in tecidos:
+      bones_totais+=bones.metros
+    bones_totais=bones_totais*proportion
+    #for bones in metros_totais:
+
+    return render(request, 'core/estoque.html', {'tecidos':tecidos, 'proportion':proportion, 'bones_totais':bones_totais})
 
 
 def excluir(request, id):

@@ -14,8 +14,8 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Seu Boné</a>
-      </button>
+      <a class="navbar-brand" href="{% url 'index' %}">Editar estoque</a>
+      <a class="navbar-brand" href="{% url 'producao' %}">Capacidade de Produção</a>
     </nav>
 
     {% block 'body' %}{% endblock%}
