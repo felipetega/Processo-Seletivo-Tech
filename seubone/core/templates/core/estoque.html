@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'head' %}
+    <link href="{% static 'core/css/index.css' %}" rel="stylesheet">
+{% endblock%}
+
+{% block 'body' %}
+
+
+
+    <div class="wrapper">
+        <div class="box"> 
+            <div class="body-box">
+                <h2 class="h2">Estoque de Tecidos</h2>
+            
+                <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Tipo de Tecido</th>
+                            <th scope="col">Cor de tecido</th>
+                            <th scope="col">Quantidade de tecido</th>
+                            <th scope="col">Quantidade de bonés</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                  {% for tecido in tecidos %}
+                      <tr>
+                          <th  scope="row">{{tecido.id}}</th>
+                          <td>{{tecido.tipo}}</td>
+                          <td>{{tecido.cor}}</td>
+                          <td>{{tecido.metros}} metro(s)</td>
+                          <td>
+                            {% widthratio tecido.metros 1 proportion %} boné(s)</td>
+                          {% endfor %}
+                      </tr>
+                  <tbody>
+                </table>
+                {{metros_totais}}
+            </div>
+
+
+            
+
+        </div>
+    </div>
+
+{% endblock%}

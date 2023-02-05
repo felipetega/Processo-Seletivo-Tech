@@ -4,6 +4,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.messages import constants
 from .models import Tecido, TIPOS_TECIDO, CORES
+from django.db.models import Sum
 #from .models import Usuario
 
 def index(request):
@@ -37,7 +38,10 @@ def index(request):
 
 def estoque(request):
     tecidos = Tecido.objects.all()
-    return render(request, 'core/estoque.html', {'tecidos':tecidos})
+    proportion = 7
+    metros_totais = Tecido.objects.all().aggregate(Sum('metros'))
+    print(metros_totais)
+    return render(request, 'core/estoque.html', {'tecidos':tecidos, 'proportion':proportion, 'metros_totais':metros_totais})
 
 
 def excluir(request, id):

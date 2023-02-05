@@ -17,22 +17,10 @@ CORES=(
 
 class Tecido(models.Model):
 
-  choices_tipo = (
-  ('LINHO', 'Linho'),
-  ('CAMURÇA', 'Camurça'),
-  ('MESCLA', 'Mescla'),
-  ('MOLETOM', 'Moletom'),
-  )
 
-  choices_cores=(
-  ('AZUL', 'Azul'),
-  ('AMARELO', 'Amarelo'),
-  ('VERMELHO', 'Vermelho'),
-  ('VERDE', 'Verde'),
-  )
 
-  tipo = models.CharField(max_length=50, choices=choices_tipo)
-  cor = models.CharField(max_length=50, choices=choices_cores)
+  tipo = models.CharField(max_length=50, choices=TIPOS_TECIDO)
+  cor = models.CharField(max_length=50, choices=CORES)
   metros = models.IntegerField()
 
   def __str__(self):
